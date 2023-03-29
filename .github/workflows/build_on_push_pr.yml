@@ -84,7 +84,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build-reports
-          path: app/build/reports
+          path: app/build/outputs/logs
 
   test_job:
     name: Unit Tests
@@ -104,3 +104,6 @@ jobs:
       - name: Unit Test Report
         uses: actions/upload-artifact@v3
         if: ${{ always() }}
+        with:
+          name: test-reports
+          path: app/build/test-results
