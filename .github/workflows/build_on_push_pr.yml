@@ -5,10 +5,11 @@ on:
   push:
     branches:
       - master
-    pull_request:
-  concurrency:
-    group: build-${{ github.ref }}
-    cancel-in-progress: true
+  pull_request: 
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   ktlint_job:
@@ -16,22 +17,22 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
-      steps:
-        - name: Checkout Code
+    steps:
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-        - run: |
-            curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.44.0/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/
-        - name: Run ktlint
+      - run: |
+          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.44.0/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/
+      - name: Run ktlint
         run: |
           ktlint --reporter=checkstyle,output=build/ktlint-report.xml
         continue-on-error: true
 
-        - name: Upload Report
+      - name: Upload Report
         uses: actions/upload-artifact@v3
-          with:
-            name: ktlint-reports
-            path: app/build/reports
+        with:
+          name: ktlint-reports
+          path: app/build/reports
 
   build_job:
     name: Build APK
@@ -88,8 +89,8 @@ jobs:
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Run Unit Tests
-          run: ./gradlew testDebugUnitTest
+        run: ./gradlew testDebugUnitTest
 
       - name: Unit Test Report
-          uses: actions/upload-artifact@v3
-          if: ${{ always() }}
+        uses: actions/upload-artifact@v3
+        if: ${{ always() }}
