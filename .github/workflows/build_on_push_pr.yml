@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ktlint-reports
-          path: app/build/ktlint-report
+          path: home/runner/work/Notes/Notes/build/ktlint-report
 
   build_job:
     name: Build APK
