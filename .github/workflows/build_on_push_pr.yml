@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ktlint-reports
-          path: app/build/reports
+          path: app/build/ktlint-report
 
   build_job:
     name: Build APK
@@ -44,6 +44,16 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+            
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
 
