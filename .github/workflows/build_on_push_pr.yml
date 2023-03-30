@@ -20,20 +20,9 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-
-      - run: |
-          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.44.0/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/
-      
-      - name: Run ktlint
-        run: |
-          ktlint --reporter=checkstyle,output=build/ktlint-report.xml
-        # continue-on-error: true
-
-      - name: Upload Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: ktlint-reports
-          path: home/runner/work/Notes/Notes/build/ktlint-report
+        
+      - name: "ktlint check"
+        uses: "vroy/gha-kotlin-linter@v1"
 
   build_job:
     name: Build APK
@@ -70,14 +59,15 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Build all build type and flavor permutations
-        run: ./gradlew assemble
+      - name: Build Release 
+        run: ./gradlew assembleRelease
 
       - name: Upload build outputs(APKs)
         uses: actions/upload-artifact@v3
         with:
           name: build-outputs
           path: app/build/outputs
+          retention-days: 1
           if-no-files-found: error
 
       - name: Upload build reports
@@ -86,6 +76,15 @@ jobs:
         with:
           name: build-reports
           path: app/build/outputs/logs
+          retention-days: 1
+
+      - name: Upload Build to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          file: app/build/outputs/apk/release/app-release-unsigned.apk
 
   test_job:
     name: Unit Tests
@@ -108,3 +107,4 @@ jobs:
         with:
           name: test-reports
           path: app/build/test-results
+          retention-days: 1
