@@ -12,5 +12,5 @@ data class NotesEntity(
     val description: String = "",
     val timeStamp: String = "",
     val color: Int = -1,
-    val isPinned: Boolean = false
+    val isPinned: Boolean = false,
 )

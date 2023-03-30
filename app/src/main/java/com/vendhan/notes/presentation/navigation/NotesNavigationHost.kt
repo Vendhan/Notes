@@ -22,22 +22,22 @@ fun NotesNavigationHost() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screen.NotesListScreen
+        startDestination = Screen.NotesListScreen,
     ) {
         composable(
-            route = Screen.NotesListScreen
+            route = Screen.NotesListScreen,
         ) {
             NotesListScreen(
                 navigateToAddNotes = {
                     navController.navigate(
-                        route = Screen.NotesAddOrEditScreen
+                        route = Screen.NotesAddOrEditScreen,
                     )
                 },
                 navigateToDetailsScreen = { notes ->
                     navController.navigate(
-                        route = Screen.NotesAddOrEditScreen + "?${Constants.NOTE_ID_KEY}=${notes.id}"
+                        route = Screen.NotesAddOrEditScreen + "?${Constants.NOTE_ID_KEY}=${notes.id}",
                     )
-                }
+                },
             )
         }
         composable(
@@ -47,8 +47,8 @@ fun NotesNavigationHost() {
                     this.type = NavType.IntType
                     this.defaultValue = -1
                     this.nullable = false
-                }
-            )
+                },
+            ),
         ) {
             val keyboardController = LocalSoftwareKeyboardController.current
             val parentEntry = remember(it) {
@@ -60,7 +60,7 @@ fun NotesNavigationHost() {
                 popBackStack = {
                     keyboardController?.hide()
                     navController.popBackStack()
-                }
+                },
             )
         }
     }

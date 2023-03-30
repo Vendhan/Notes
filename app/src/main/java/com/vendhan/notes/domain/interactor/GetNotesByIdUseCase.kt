@@ -9,7 +9,7 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class GetNotesByIdUseCase @Inject constructor(
-    private val notesRepository: NotesRepository
+    private val notesRepository: NotesRepository,
 ) {
     suspend fun getNotesByID(id: Int): Flow<Result<NotesEntity>> {
         return flow {

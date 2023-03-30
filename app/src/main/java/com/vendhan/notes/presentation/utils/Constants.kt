@@ -23,7 +23,7 @@ object Constants {
         LightOrange,
         BlueGrey,
         Green,
-        Amber
+        Amber,
     )
     const val NOTE_ID_KEY = "noteId"
 }

@@ -5,7 +5,7 @@ import com.vendhan.notes.domain.repository.NotesRepository
 import javax.inject.Inject
 
 class UpdateNotesUseCase @Inject constructor(
-    private val notesRepository: NotesRepository
+    private val notesRepository: NotesRepository,
 ) {
     suspend fun updateNotes(notes: NotesEntity) {
         notesRepository

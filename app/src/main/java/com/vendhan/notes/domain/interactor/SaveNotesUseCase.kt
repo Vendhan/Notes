@@ -9,7 +9,7 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class SaveNotesUseCase @Inject constructor(
-    private val notesRepository: NotesRepository
+    private val notesRepository: NotesRepository,
 ) {
     suspend fun saveNotes(notes: NotesEntity): Flow<Result<Boolean>> {
         return flow {
@@ -17,7 +17,7 @@ class SaveNotesUseCase @Inject constructor(
             try {
                 notesRepository.addNotes(notes = notes)
                 emit(
-                    Result.Success(data = true)
+                    Result.Success(data = true),
                 )
             } catch (e: Exception) {
                 Result.Error(message = e.localizedMessage ?: "An error has occurred")

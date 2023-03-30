@@ -6,6 +6,6 @@ import com.vendhan.notes.data.database.entity.NotesEntity
 @Composable
 fun NotesList(
     isPinnedListAvailable: Boolean,
-    notesList: List<NotesEntity>
+    notesList: List<NotesEntity>,
 ) {
 }

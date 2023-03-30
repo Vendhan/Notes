@@ -17,7 +17,7 @@ fun ExtendableFloatingActionButton(
     extended: Boolean,
     text: @Composable () -> Unit,
     icon: @Composable () -> Unit,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     FloatingActionButton(
         modifier = modifier,

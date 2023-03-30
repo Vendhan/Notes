@@ -30,7 +30,7 @@ class NotesAddOrEditViewModel @Inject constructor(
     private val unPinNotesUseCase: UnPinNotesUseCase,
     private val deleteNotesUseCase: DeleteNotesUseCase,
     private val updateNotesUseCase: UpdateNotesUseCase,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val notesID = mutableStateOf(-1)
@@ -113,7 +113,7 @@ class NotesAddOrEditViewModel @Inject constructor(
                                         description = descriptionFieldState.value,
                                         color = colorState.value,
                                         timeStamp = getTimeStamp(),
-                                        isPinned = isPinned.value
+                                        isPinned = isPinned.value,
                                     ),
                                 )
                         }
@@ -126,7 +126,7 @@ class NotesAddOrEditViewModel @Inject constructor(
                                         description = descriptionFieldState.value,
                                         color = colorState.value,
                                         timeStamp = getTimeStamp(),
-                                        isPinned = isPinned.value
+                                        isPinned = isPinned.value,
                                     ),
                                 )
                                 .collect { result ->

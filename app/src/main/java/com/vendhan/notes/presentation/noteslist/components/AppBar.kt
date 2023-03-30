@@ -20,7 +20,7 @@ import com.vendhan.notes.presentation.noteslist.NotesListViewModel
 @Composable
 fun MyAppBar(
     isNotesEmpty: Boolean,
-    notesListViewModel: NotesListViewModel
+    notesListViewModel: NotesListViewModel,
 ) {
     TopAppBar(
         title = {

@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class NotesRepositoryImpl @Inject constructor(
     private val notesDao: NotesDao,
-    @CoroutinesDispatchersModule.IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    @CoroutinesDispatchersModule.IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : NotesRepository {
 
     override suspend fun getAllNotes(): Flow<List<NotesEntity>> {

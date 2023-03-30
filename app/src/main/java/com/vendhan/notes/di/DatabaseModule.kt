@@ -17,11 +17,11 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideYourDatabase(
-        @ApplicationContext app: Context
+        @ApplicationContext app: Context,
     ) = Room.databaseBuilder(
         app,
         AppDatabase::class.java,
-        "Notes_DB"
+        "Notes_DB",
     ).build()
 
     @Singleton
