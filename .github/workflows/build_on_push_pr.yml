@@ -34,7 +34,7 @@ jobs:
         if: ${{ always() }}
         with:
           name: ktlint-reports
-          report-path: build/*ktlint-report.xml # Support glob patterns by https://www.npmjs.com/package/@actions/glob
+          path: build/*ktlint-report.xml # Support glob patterns by https://www.npmjs.com/package/@actions/glob
           retention-days: 1
         continue-on-error: false # If annotations contain error of severity, action-ktlint exit 1.
 
