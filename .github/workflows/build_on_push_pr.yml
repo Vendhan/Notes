@@ -26,7 +26,7 @@ jobs:
       
       - name: Run ktlint
         run: |
-          ktlint --reporter=checkstyle,output=build/ktlint-report.xml
+          ktlint --reporter=checkstyle,output=build/lint/ktlint-report.xml
         # continue-on-error: true
 
       - name: Upload Report
@@ -34,7 +34,8 @@ jobs:
         if: ${{ always() }}
         with:
           name: ktlint-reports
-          path: home/runner/work/Notes/Notes/build/ktlint-report
+          path: build/lint/ktlint-report
+          retention-days: 1
 
   build_job:
     name: Build APK
@@ -79,6 +80,7 @@ jobs:
         with:
           name: build-outputs
           path: app/build/outputs
+          retention-days: 1
           if-no-files-found: error
 
       - name: Upload build reports
@@ -87,6 +89,7 @@ jobs:
         with:
           name: build-reports
           path: app/build/outputs/logs
+          retention-days: 1
 
   test_job:
     name: Unit Tests
@@ -109,3 +112,4 @@ jobs:
         with:
           name: test-reports
           path: app/build/test-results
+          retention-days: 1
