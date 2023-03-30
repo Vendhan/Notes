@@ -21,8 +21,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
         
-      - name: "ktlint check"
-        uses: "vroy/gha-kotlin-linter@v1"
+      - run: |
+          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.44.0/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/
+      
+      - name: Run ktlint
+        run: |
+          ktlint --reporter=checkstyle,output=app/build/lint/ktlint-report.xml
+        # continue-on-error: true
+
+      - name: Upload Report
+        uses: yutailang0119/action-ktlint@v3
+        if: ${{ always() }}
+        with:
+          report-path: build/*ktlint-report.xml # Support glob patterns by https://www.npmjs.com/package/@actions/glob
+        continue-on-error: false # If annotations contain error of severity, action-ktlint exit 1.
 
   build_job:
     name: Build APK
