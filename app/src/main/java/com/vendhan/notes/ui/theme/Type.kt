@@ -11,53 +11,53 @@ val PoppinsFont = FontFamily(
     Font(R.font.poppins_black, FontWeight.Black),
     Font(R.font.poppins_bold, FontWeight.Bold),
     Font(R.font.poppins_medium, FontWeight.Medium),
-    Font(R.font.poppins_regular, FontWeight.Normal)
+    Font(R.font.poppins_regular, FontWeight.Normal),
 )
 
 val Typography = Typography(
     displayLarge = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     displayMedium = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     displaySmall = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     headlineLarge = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     headlineMedium = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     headlineSmall = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     titleLarge = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     titleMedium = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     titleSmall = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     bodyLarge = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     bodyMedium = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     bodySmall = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     labelLarge = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     labelMedium = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
     labelSmall = TextStyle(
-        fontFamily = PoppinsFont
+        fontFamily = PoppinsFont,
     ),
 )

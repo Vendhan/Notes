@@ -1,9 +1,10 @@
 @file:OptIn(
-    ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class,
-    ExperimentalMaterial3Api::class
+    ExperimentalFoundationApi::class,
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterial3Api::class,
 )
 
-package com.vendhan.notes.presentation.notes_list
+package com.vendhan.notes.presentation.noteslist
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
@@ -28,15 +29,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import com.vendhan.notes.common.Result
 import com.vendhan.notes.data.database.entity.NotesEntity
-import com.vendhan.notes.presentation.notes_list.components.ExtendableFloatingActionButton
-import com.vendhan.notes.presentation.notes_list.components.MyAppBar
-import com.vendhan.notes.presentation.notes_list.components.NotesItemCard
+import com.vendhan.notes.presentation.noteslist.components.ExtendableFloatingActionButton
+import com.vendhan.notes.presentation.noteslist.components.MyAppBar
+import com.vendhan.notes.presentation.noteslist.components.NotesItemCard
 
 @Composable
 fun NotesListScreen(
     notesListViewModel: NotesListViewModel = hiltViewModel(),
     navigateToAddNotes: () -> Unit,
-    navigateToDetailsScreen: (NotesEntity) -> Unit
+    navigateToDetailsScreen: (NotesEntity) -> Unit,
 ) {
     val listState = rememberLazyListState()
     val gridState = rememberLazyGridState()
@@ -44,23 +45,23 @@ fun NotesListScreen(
         mutableStateOf(true)
     }
     val showExtendedFab by
-    remember(listState.firstVisibleItemIndex) {
-        derivedStateOf {
-            listState.firstVisibleItemIndex <= 1
+        remember(listState.firstVisibleItemIndex) {
+            derivedStateOf {
+                listState.firstVisibleItemIndex <= 1
+            }
         }
-    }
     val showExtendedFab1 by
-    remember(gridState.firstVisibleItemIndex) {
-        derivedStateOf {
-            gridState.firstVisibleItemIndex <= 0
+        remember(gridState.firstVisibleItemIndex) {
+            derivedStateOf {
+                gridState.firstVisibleItemIndex <= 0
+            }
         }
-    }
     Scaffold(
         modifier = Modifier,
         topBar = {
             MyAppBar(
                 isNotesEmpty = isNotesEmpty.value,
-                notesListViewModel = notesListViewModel
+                notesListViewModel = notesListViewModel,
             )
         },
         snackbarHost = {
@@ -74,17 +75,17 @@ fun NotesListScreen(
                 icon = {
                     Icon(
                         imageVector = Icons.Filled.Add,
-                        contentDescription = "Add"
+                        contentDescription = "Add",
                     )
                 },
                 text = {
                     Text(
-                        text = "New Notes"
+                        text = "New Notes",
                     )
                 },
                 onClick = {
                     navigateToAddNotes()
-                }
+                },
             )
         },
     ) { paddingValues ->
@@ -127,17 +128,18 @@ fun NotesListScreen(
                                 .sortedByDescending { it.timeStamp },
                             navigateToDetailsScreen = navigateToDetailsScreen,
                             state = gridState,
-                            modifier = Modifier.padding(paddingValues)
+                            modifier = Modifier.padding(paddingValues),
                         )
-                    } else
+                    } else {
                         NotesListScreenBody(
                             pinnedNotesList = result.data.filter { it.isPinned },
                             notesList = result.data.filter { !it.isPinned }
                                 .sortedByDescending { it.timeStamp },
                             navigateToDetailsScreen = navigateToDetailsScreen,
                             state = listState,
-                            modifier = Modifier.padding(paddingValues)
+                            modifier = Modifier.padding(paddingValues),
                         )
+                    }
                 }
             }
         }
@@ -156,7 +158,7 @@ fun NotesListScreenBody(
         state = state,
         modifier = modifier
             .padding(start = 8.dp, end = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         if (pinnedNotesList.isNotEmpty()) {
             item {
@@ -164,7 +166,7 @@ fun NotesListScreenBody(
             }
             items(
                 key = { it.id },
-                items = pinnedNotesList
+                items = pinnedNotesList,
             ) { pinnedNotes ->
                 NotesItemCard(
                     notes = pinnedNotes,
@@ -178,11 +180,11 @@ fun NotesListScreenBody(
             }
             items(
                 key = { it.id },
-                items = notesList
+                items = notesList,
             ) { notes ->
                 NotesItemCard(
                     notes = notes,
-                    navigateToDetailsScreen = navigateToDetailsScreen
+                    navigateToDetailsScreen = navigateToDetailsScreen,
                 )
             }
         }
@@ -206,38 +208,37 @@ fun NotesGridScreenBody(
         modifier = modifier
             .padding(start = 8.dp, end = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         if (pinnedNotesList.isNotEmpty()) {
             item(
                 span = {
                     GridItemSpan(maxLineSpan)
-                }
+                },
             ) {
                 PinnedNotesHeader()
             }
             items(
-                pinnedNotesList
+                pinnedNotesList,
             ) { pinnedNotes ->
                 NotesItemCard(
                     notes = pinnedNotes,
-                    navigateToDetailsScreen = navigateToDetailsScreen
+                    navigateToDetailsScreen = navigateToDetailsScreen,
                 )
             }
         }
         if (notesList.isNotEmpty()) {
-
             item(
                 span = {
                     GridItemSpan(maxLineSpan)
-                }
+                },
             ) {
                 OtherNotesHeader()
             }
             items(notesList) { notes ->
                 NotesItemCard(
                     notes = notes,
-                    navigateToDetailsScreen = navigateToDetailsScreen
+                    navigateToDetailsScreen = navigateToDetailsScreen,
                 )
             }
         }
@@ -253,15 +254,15 @@ fun ShowEmptyListCard() {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             Icon(
                 imageVector = Icons.Rounded.Description,
                 contentDescription = "empty_list",
                 modifier = Modifier.size(
-                    200.dp
+                    200.dp,
                 ),
-                tint = MaterialTheme.colorScheme.primaryContainer
+                tint = MaterialTheme.colorScheme.primaryContainer,
             )
             Text(
                 text = "Your notes will appear here",
@@ -280,8 +281,8 @@ fun OtherNotesHeader() {
         modifier = Modifier.padding(
             start = 16.dp,
             top = 16.dp,
-            bottom = 8.dp
-        )
+            bottom = 8.dp,
+        ),
     )
 }
 
@@ -293,7 +294,7 @@ fun PinnedNotesHeader() {
         modifier = Modifier.padding(
             start = 16.dp,
             top = 16.dp,
-            bottom = 8.dp
-        )
+            bottom = 8.dp,
+        ),
     )
 }

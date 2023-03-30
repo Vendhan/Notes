@@ -1,4 +1,4 @@
-package com.vendhan.notes.presentation.notes_list.components
+package com.vendhan.notes.presentation.noteslist.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Row
@@ -17,7 +17,7 @@ fun ExtendableFloatingActionButton(
     extended: Boolean,
     text: @Composable () -> Unit,
     icon: @Composable () -> Unit,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     FloatingActionButton(
         modifier = modifier,
@@ -26,9 +26,9 @@ fun ExtendableFloatingActionButton(
         Row(
             modifier = Modifier.padding(
                 start = 16.dp,
-                end = 16.dp
+                end = 16.dp,
             ),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             icon()
 

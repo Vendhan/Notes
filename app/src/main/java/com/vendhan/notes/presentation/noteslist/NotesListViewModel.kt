@@ -1,4 +1,4 @@
-package com.vendhan.notes.presentation.notes_list
+package com.vendhan.notes.presentation.noteslist
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -6,18 +6,21 @@ import androidx.lifecycle.viewModelScope
 import com.vendhan.notes.common.Result
 import com.vendhan.notes.common.UiEvent
 import com.vendhan.notes.data.database.entity.NotesEntity
-import com.vendhan.notes.domain.interactor.SaveNotesUseCase
 import com.vendhan.notes.domain.interactor.GetAllNotesUseCase
+import com.vendhan.notes.domain.interactor.SaveNotesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NotesListViewModel @Inject constructor(
     private val getAllNotesUseCase: GetAllNotesUseCase,
-    private val saveNotesUseCase: SaveNotesUseCase
+    private val saveNotesUseCase: SaveNotesUseCase,
 ) : ViewModel() {
 
     private val _notes = MutableStateFlow<Result<List<NotesEntity>>>(Result.Loading)
@@ -51,7 +54,7 @@ class NotesListViewModel @Inject constructor(
             title = "Some Random Note",
             description = "It's the description of the notes",
             color = 0,
-            isPinned = false
+            isPinned = false,
         )
         viewModelScope.launch {
             saveNotesUseCase.saveNotes(notes = note)

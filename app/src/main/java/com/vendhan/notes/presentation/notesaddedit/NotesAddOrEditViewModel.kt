@@ -1,4 +1,4 @@
-package com.vendhan.notes.presentation.notes_add_edit
+package com.vendhan.notes.presentation.notesaddedit
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -8,7 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.vendhan.notes.common.Result
 import com.vendhan.notes.common.UiEvent
 import com.vendhan.notes.data.database.entity.NotesEntity
-import com.vendhan.notes.domain.interactor.*
+import com.vendhan.notes.domain.interactor.DeleteNotesUseCase
+import com.vendhan.notes.domain.interactor.GetNotesByIdUseCase
+import com.vendhan.notes.domain.interactor.PinNotesUseCase
+import com.vendhan.notes.domain.interactor.SaveNotesUseCase
+import com.vendhan.notes.domain.interactor.UnPinNotesUseCase
+import com.vendhan.notes.domain.interactor.UpdateNotesUseCase
 import com.vendhan.notes.presentation.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -25,7 +30,7 @@ class NotesAddOrEditViewModel @Inject constructor(
     private val unPinNotesUseCase: UnPinNotesUseCase,
     private val deleteNotesUseCase: DeleteNotesUseCase,
     private val updateNotesUseCase: UpdateNotesUseCase,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val notesID = mutableStateOf(-1)
@@ -87,18 +92,19 @@ class NotesAddOrEditViewModel @Inject constructor(
             is NotesAddOrEditEvent.EnteredTitle -> TODO()
             is NotesAddOrEditEvent.PinNote -> {
                 viewModelScope.launch {
-                    if (isPinned.value.not())
+                    if (isPinned.value.not()) {
                         pinNotesUseCase
                             .pinNotes(id = getNoteID())
-                    else
+                    } else {
                         unPinNotesUseCase
                             .unPinNotes(id = getNoteID())
+                    }
                 }
             }
             is NotesAddOrEditEvent.SaveNote -> {
                 viewModelScope.launch {
                     if (loadNoteState.value is Result.Success || getNoteID() != -1) {
-                        if (notesChanged)
+                        if (notesChanged) {
                             updateNotesUseCase
                                 .updateNotes(
                                     NotesEntity(
@@ -107,11 +113,12 @@ class NotesAddOrEditViewModel @Inject constructor(
                                         description = descriptionFieldState.value,
                                         color = colorState.value,
                                         timeStamp = getTimeStamp(),
-                                        isPinned = isPinned.value
-                                    )
+                                        isPinned = isPinned.value,
+                                    ),
                                 )
+                        }
                     } else {
-                        if (titleFieldState.value.isNotEmpty() || descriptionFieldState.value.isNotEmpty())
+                        if (titleFieldState.value.isNotEmpty() || descriptionFieldState.value.isNotEmpty()) {
                             saveNotesUseCase
                                 .saveNotes(
                                     NotesEntity(
@@ -119,13 +126,14 @@ class NotesAddOrEditViewModel @Inject constructor(
                                         description = descriptionFieldState.value,
                                         color = colorState.value,
                                         timeStamp = getTimeStamp(),
-                                        isPinned = isPinned.value
-                                    )
+                                        isPinned = isPinned.value,
+                                    ),
                                 )
                                 .collect { result ->
                                     if (result is Result.Success) {
                                     }
                                 }
+                        }
                     }
                 }
             }

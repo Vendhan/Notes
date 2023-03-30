@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalFoundationApi::class)
 
-package com.vendhan.notes.presentation.notes_add_edit.components
+package com.vendhan.notes.presentation.notesaddedit.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
@@ -25,7 +25,7 @@ fun HintTextField(
     onChange: (String) -> Unit,
     hint: String,
     textStyle: TextStyle = TextStyle(),
-    bringIntoViewRequester: BringIntoViewRequester
+    bringIntoViewRequester: BringIntoViewRequester,
 ) {
     Box(modifier = modifier) {
         if (value.isEmpty()) {
@@ -33,13 +33,13 @@ fun HintTextField(
                 text = hint,
                 style = textStyle.copy(
                     color = MaterialTheme.colorScheme.onBackground.copy(
-                        alpha = 0.5F
-                    )
-                )
+                        alpha = 0.5F,
+                    ),
+                ),
             )
         }
         MaterialTheme(
-            colorScheme = darkColorScheme(primary = MaterialTheme.colorScheme.onBackground)
+            colorScheme = darkColorScheme(primary = MaterialTheme.colorScheme.onBackground),
         ) {
             BasicTextField(
                 modifier = modifier.fillMaxWidth(),
@@ -48,9 +48,9 @@ fun HintTextField(
                 textStyle = textStyle,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
-                    capitalization = KeyboardCapitalization.Sentences
+                    capitalization = KeyboardCapitalization.Sentences,
                 ),
-                cursorBrush = SolidColor(value = MaterialTheme.colorScheme.onBackground)
+                cursorBrush = SolidColor(value = MaterialTheme.colorScheme.onBackground),
             )
         }
     }

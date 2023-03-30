@@ -12,9 +12,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.vendhan.notes.presentation.notes_add_edit.NotesAddOrEditScreen
-import com.vendhan.notes.presentation.notes_list.NotesListScreen
-import com.vendhan.notes.presentation.notes_list.NotesListViewModel
+import com.vendhan.notes.presentation.notesaddedit.NotesAddOrEditScreen
+import com.vendhan.notes.presentation.noteslist.NotesListScreen
+import com.vendhan.notes.presentation.noteslist.NotesListViewModel
 import com.vendhan.notes.presentation.utils.Constants
 
 @Composable

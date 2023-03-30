@@ -1,4 +1,4 @@
-package com.vendhan.notes.presentation.notes_add_edit.components
+package com.vendhan.notes.presentation.notesaddedit.components
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.size

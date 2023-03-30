@@ -1,4 +1,4 @@
-package com.vendhan.notes.presentation.notes_add_edit
+package com.vendhan.notes.presentation.notesaddedit
 
 import androidx.compose.ui.focus.FocusState
 

@@ -1,16 +1,17 @@
-@file:OptIn(
-    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
-    ExperimentalMaterial3Api::class,
-    ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class
-)
-
-package com.vendhan.notes.presentation.notes_add_edit
+package com.vendhan.notes.presentation.notesaddedit
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.relocation.BringIntoViewRequester
@@ -20,7 +21,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material3.*
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -36,17 +42,27 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.vendhan.notes.common.Result
-import com.vendhan.notes.presentation.notes_add_edit.components.AppBar
-import com.vendhan.notes.presentation.notes_add_edit.components.HintTextField
-import com.vendhan.notes.presentation.notes_list.NotesListViewModel
-import com.vendhan.notes.presentation.notes_list.components.ExtendableFloatingActionButton
-import com.vendhan.notes.ui.theme.*
+import com.vendhan.notes.presentation.noteslist.NotesListViewModel
+import com.vendhan.notes.presentation.noteslist.components.ExtendableFloatingActionButton
+import com.vendhan.notes.presentation.notesaddedit.components.AppBar
+import com.vendhan.notes.presentation.notesaddedit.components.HintTextField
+import com.vendhan.notes.ui.theme.Amber
+import com.vendhan.notes.ui.theme.BabyBlue
+import com.vendhan.notes.ui.theme.BlueGrey
+import com.vendhan.notes.ui.theme.Green
+import com.vendhan.notes.ui.theme.Lavender
+import com.vendhan.notes.ui.theme.LightGreen
+import com.vendhan.notes.ui.theme.LightOrange
+import com.vendhan.notes.ui.theme.LightPink
+import com.vendhan.notes.ui.theme.RedOrange
+import com.vendhan.notes.ui.theme.Teal
 
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun NotesAddOrEditScreen(
     notesListViewModel: NotesListViewModel,
     notesAddOrEditViewModel: NotesAddOrEditViewModel = hiltViewModel(),
-    popBackStack: () -> Unit
+    popBackStack: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier,
@@ -66,7 +82,7 @@ fun NotesAddOrEditScreen(
                     notesAddOrEditViewModel.onEvent(NotesAddOrEditEvent.DeleteNote)
                     popBackStack()
                 },
-                onClickColorPicker = {}
+                onClickColorPicker = {},
             )
         },
         snackbarHost = {},
@@ -76,20 +92,20 @@ fun NotesAddOrEditScreen(
                 icon = {
                     Icon(
                         imageVector = Icons.Filled.Save,
-                        contentDescription = "Save"
+                        contentDescription = "Save",
                     )
                 },
                 text = {
                     Text(
-                        text = "Save"
+                        text = "Save",
                     )
                 },
                 onClick = {
                     notesAddOrEditViewModel.onEvent(NotesAddOrEditEvent.SaveNote)
                     popBackStack()
-                }
+                },
             )
-        }
+        },
     ) {
         when (val result = notesAddOrEditViewModel.loadNoteState.value) {
             is Result.Loading -> {
@@ -120,10 +136,12 @@ fun NotesAddOrEditScreen(
     }
 }
 
+@ExperimentalComposeUiApi
+@ExperimentalFoundationApi
 @Composable
 fun NotesAddOrEditScreenBody(
     modifier: Modifier,
-    notesAddOrEditViewModel: NotesAddOrEditViewModel
+    notesAddOrEditViewModel: NotesAddOrEditViewModel,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -142,11 +160,11 @@ fun NotesAddOrEditScreenBody(
             },
             textStyle = MaterialTheme.typography.headlineMedium.copy(
                 color = MaterialTheme.colorScheme.onBackground,
-                fontWeight = FontWeight.SemiBold
+                fontWeight = FontWeight.SemiBold,
             ),
             hint = "Title",
             modifier = Modifier.fillMaxWidth(),
-            bringIntoViewRequester = bringIntoViewRequester
+            bringIntoViewRequester = bringIntoViewRequester,
         )
         Spacer(modifier = Modifier.height(16.dp))
         HintTextField(
@@ -156,26 +174,26 @@ fun NotesAddOrEditScreenBody(
                 notesAddOrEditViewModel.descriptionFieldState.value = it
             },
             textStyle = MaterialTheme.typography.bodyLarge.copy(
-                color = MaterialTheme.colorScheme.onBackground
+                color = MaterialTheme.colorScheme.onBackground,
             ),
             hint = "Description",
             modifier = Modifier
                 .weight(1F)
                 .fillMaxSize(),
-            bringIntoViewRequester = bringIntoViewRequester
+            bringIntoViewRequester = bringIntoViewRequester,
         )
     }
 }
 
 @Composable
 fun BottomSheetColorPicker(
-    notesAddOrEditViewModel: NotesAddOrEditViewModel
+    notesAddOrEditViewModel: NotesAddOrEditViewModel,
 ) {
     Column {
         Text(
             text = "Color",
             style = MaterialTheme.typography.labelMedium,
-            modifier = Modifier.padding(all = 16.dp)
+            modifier = Modifier.padding(all = 16.dp),
         )
         val colors: List<Color> =
             listOf(
@@ -189,23 +207,24 @@ fun BottomSheetColorPicker(
                 LightOrange,
                 BlueGrey,
                 Green,
-                Amber
+                Amber,
             )
         LazyRow(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
         ) {
             itemsIndexed(colors) { selected: Int, color: Color ->
-                val value = if (notesAddOrEditViewModel.colorState.value > 0)
+                val value = if (notesAddOrEditViewModel.colorState.value > 0) {
                     colors[notesAddOrEditViewModel.colorState.value.plus(1)]
-                else
+                } else {
                     colors[0]
+                }
                 ColorPickerItem(
                     color = color,
                     selectedValue = value,
                     onClickColor = {
                         notesAddOrEditViewModel.notesChanged = true
                         notesAddOrEditViewModel.colorState.value = selected
-                    }
+                    },
                 )
             }
         }
@@ -216,9 +235,9 @@ fun BottomSheetColorPicker(
 fun ColorPickerItem(
     color: Color,
     selectedValue: Color,
-    onClickColor: (Color) -> Unit
+    onClickColor: (Color) -> Unit,
 ) {
-    if (color != selectedValue)
+    if (color != selectedValue) {
         Box(
             modifier = Modifier
                 .padding(end = 16.dp)
@@ -226,15 +245,16 @@ fun ColorPickerItem(
                     selected = (color == selectedValue),
                     onClick = {
                         onClickColor(color)
-                    }
+                    },
                 )
                 .size(64.dp)
                 .clip(RoundedCornerShape(24.dp))
                 .background(
-                    color = color
-                )
+                    color = color,
+                ),
         )
-    if (color == selectedValue)
+    }
+    if (color == selectedValue) {
         Box(
             modifier = Modifier
                 .padding(end = 16.dp)
@@ -243,10 +263,10 @@ fun ColorPickerItem(
                 .border(
                     border = BorderStroke(
                         width = 2.dp,
-                        brush = SolidColor(MaterialTheme.colorScheme.primary)
+                        brush = SolidColor(MaterialTheme.colorScheme.primary),
                     ),
-                    shape = RoundedCornerShape(24.dp)
-                )
+                    shape = RoundedCornerShape(24.dp),
+                ),
         ) {
             Icon(
                 imageVector = Icons.Rounded.Check,
@@ -254,7 +274,8 @@ fun ColorPickerItem(
                 modifier = Modifier
                     .size(42.dp)
                     .align(Alignment.Center),
-                tint = MaterialTheme.colorScheme.primary.copy(alpha = .8F)
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = .8F),
             )
         }
+    }
 }
