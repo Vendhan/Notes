@@ -20,22 +20,9 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-
-      - run: |
-          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.44.0/ktlint && chmod a+x ktlint && sudo mv ktlint /usr/local/bin/
-      
-      - name: Run ktlint
-        run: |
-          ktlint --reporter=checkstyle,output=app/build/lint/ktlint-report.xml
-        # continue-on-error: true
-
-      - name: Upload Report
-        uses: actions/upload-artifact@v3
-        if: ${{ always() }}
-        with:
-          name: ktlint-reports
-          path: app/build/lint/ktlint-report
-          retention-days: 1
+        
+      - name: "ktlint check"
+        uses: "vroy/gha-kotlin-linter@v1"
 
   build_job:
     name: Build APK
