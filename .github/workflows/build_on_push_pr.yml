@@ -26,7 +26,7 @@ jobs:
       
       - name: Run ktlint
         run: |
-          ktlint --reporter=checkstyle,output=build/lint/ktlint-report.xml
+          ktlint --reporter=checkstyle,output=app/build/lint/ktlint-report.xml
         # continue-on-error: true
 
       - name: Upload Report
