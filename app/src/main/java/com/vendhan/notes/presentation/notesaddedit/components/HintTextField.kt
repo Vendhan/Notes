@@ -33,7 +33,7 @@ fun HintTextField(
                 text = hint,
                 style = textStyle.copy(
                     color = MaterialTheme.colorScheme.onBackground.copy(
-                        alpha = 0.5F,
+                        alpha = 0.5F
                     ),
                 ),
             )
@@ -50,7 +50,7 @@ fun HintTextField(
                     keyboardType = KeyboardType.Text,
                     capitalization = KeyboardCapitalization.Sentences,
                 ),
-                cursorBrush = SolidColor(value = MaterialTheme.colorScheme.onBackground),
+                cursorBrush = SolidColor(value = MaterialTheme.colorScheme.onBackground)
             )
         }
     }

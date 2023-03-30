@@ -22,7 +22,7 @@ fun AppBar(
     onBackPressed: () -> Unit,
     onClickPin: () -> Unit,
     onClickDeleteNotes: () -> Unit,
-    onClickColorPicker: () -> Unit,
+    onClickColorPicker: () -> Unit
 ) {
     BackHandler {
         onBackPressed()
@@ -40,7 +40,7 @@ fun AppBar(
                 Icon(
                     imageVector = Icons.Rounded.ArrowBack,
                     contentDescription = "back_button",
-                    tint = MaterialTheme.colorScheme.onBackground,
+                    tint = MaterialTheme.colorScheme.onBackground
                 )
             }
         },
@@ -54,7 +54,7 @@ fun AppBar(
                     imageVector = if (isPinned) Icons.Filled.PushPin else Icons.Outlined.PushPin,
                     contentDescription = "pin",
                     modifier = Modifier.size(24.dp),
-                    tint = MaterialTheme.colorScheme.onBackground,
+                    tint = MaterialTheme.colorScheme.onBackground
                 )
             }
             IconButton(
@@ -65,7 +65,7 @@ fun AppBar(
                 Icon(
                     imageVector = Icons.Rounded.Palette,
                     contentDescription = "color",
-                    tint = MaterialTheme.colorScheme.onBackground,
+                    tint = MaterialTheme.colorScheme.onBackground
                 )
             }
             IconButton(
@@ -77,10 +77,10 @@ fun AppBar(
                     imageVector = Icons.Rounded.Delete,
                     contentDescription = "delete",
                     modifier = Modifier.size(24.dp),
-                    tint = MaterialTheme.colorScheme.onBackground,
+                    tint = MaterialTheme.colorScheme.onBackground
                 )
             }
         },
-        title = {},
+        title = {}
     )
 }

@@ -26,7 +26,7 @@ fun NotesItemCard(
     modifier: Modifier = Modifier,
     notes: NotesEntity,
     navigateToDetailsScreen: (NotesEntity) -> Unit,
-    maxHeight: Int = 260,
+    maxHeight: Int = 260
 ) {
     Card(
         modifier = modifier

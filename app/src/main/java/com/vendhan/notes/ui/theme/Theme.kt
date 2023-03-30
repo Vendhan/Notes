@@ -37,7 +37,7 @@ private val MyAppDarkColorScheme = darkColorScheme(
     outline = md_theme_dark_outline,
     inverseOnSurface = md_theme_dark_inverseOnSurface,
     inverseSurface = md_theme_dark_inverseSurface,
-    inversePrimary = md_theme_dark_inversePrimary,
+    inversePrimary = md_theme_dark_inversePrimary
 )
 
 private val MyAppLightColorScheme = lightColorScheme(
@@ -67,7 +67,7 @@ private val MyAppLightColorScheme = lightColorScheme(
     outline = md_theme_light_outline,
     inverseOnSurface = md_theme_light_inverseOnSurface,
     inverseSurface = md_theme_light_inverseSurface,
-    inversePrimary = md_theme_light_inversePrimary,
+    inversePrimary = md_theme_light_inversePrimary
 )
 
 @Composable

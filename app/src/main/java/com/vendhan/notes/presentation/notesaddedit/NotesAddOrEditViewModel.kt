@@ -113,7 +113,7 @@ class NotesAddOrEditViewModel @Inject constructor(
                                         description = descriptionFieldState.value,
                                         color = colorState.value,
                                         timeStamp = getTimeStamp(),
-                                        isPinned = isPinned.value,
+                                        isPinned = isPinned.value
                                     ),
                                 )
                         }
@@ -126,7 +126,7 @@ class NotesAddOrEditViewModel @Inject constructor(
                                         description = descriptionFieldState.value,
                                         color = colorState.value,
                                         timeStamp = getTimeStamp(),
-                                        isPinned = isPinned.value,
+                                        isPinned = isPinned.value
                                     ),
                                 )
                                 .collect { result ->

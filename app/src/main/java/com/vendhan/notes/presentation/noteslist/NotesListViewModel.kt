@@ -54,7 +54,7 @@ class NotesListViewModel @Inject constructor(
             title = "Some Random Note",
             description = "It's the description of the notes",
             color = 0,
-            isPinned = false,
+            isPinned = false
         )
         viewModelScope.launch {
             saveNotesUseCase.saveNotes(notes = note)

@@ -82,7 +82,7 @@ fun NotesAddOrEditScreen(
                     notesAddOrEditViewModel.onEvent(NotesAddOrEditEvent.DeleteNote)
                     popBackStack()
                 },
-                onClickColorPicker = {},
+                onClickColorPicker = {}
             )
         },
         snackbarHost = {},
@@ -92,12 +92,12 @@ fun NotesAddOrEditScreen(
                 icon = {
                     Icon(
                         imageVector = Icons.Filled.Save,
-                        contentDescription = "Save",
+                        contentDescription = "Save"
                     )
                 },
                 text = {
                     Text(
-                        text = "Save",
+                        text = "Save"
                     )
                 },
                 onClick = {
@@ -111,7 +111,7 @@ fun NotesAddOrEditScreen(
             is Result.Loading -> {
                 Box(modifier = Modifier.fillMaxSize()) {
                     CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.Center),
+                        modifier = Modifier.align(Alignment.Center)
                     )
                 }
             }
@@ -121,7 +121,7 @@ fun NotesAddOrEditScreen(
                         modifier = Modifier.align(Alignment.Center),
                         text = result.message,
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.headlineSmall,
+                        style = MaterialTheme.typography.headlineSmall
                     )
                 }
             }
@@ -129,7 +129,7 @@ fun NotesAddOrEditScreen(
                 NotesAddOrEditScreenBody(
                     modifier = Modifier
                         .padding(it),
-                    notesAddOrEditViewModel = notesAddOrEditViewModel,
+                    notesAddOrEditViewModel = notesAddOrEditViewModel
                 )
             }
         }
@@ -150,7 +150,7 @@ fun NotesAddOrEditScreenBody(
         modifier = modifier
             .fillMaxSize()
             .padding(all = 16.dp)
-            .bringIntoViewRequester(bringIntoViewRequester),
+            .bringIntoViewRequester(bringIntoViewRequester)
     ) {
         HintTextField(
             value = notesAddOrEditViewModel.titleFieldState.value,
@@ -164,7 +164,7 @@ fun NotesAddOrEditScreenBody(
             ),
             hint = "Title",
             modifier = Modifier.fillMaxWidth(),
-            bringIntoViewRequester = bringIntoViewRequester,
+            bringIntoViewRequester = bringIntoViewRequester
         )
         Spacer(modifier = Modifier.height(16.dp))
         HintTextField(
@@ -180,7 +180,7 @@ fun NotesAddOrEditScreenBody(
             modifier = Modifier
                 .weight(1F)
                 .fillMaxSize(),
-            bringIntoViewRequester = bringIntoViewRequester,
+            bringIntoViewRequester = bringIntoViewRequester
         )
     }
 }
@@ -193,7 +193,7 @@ fun BottomSheetColorPicker(
         Text(
             text = "Color",
             style = MaterialTheme.typography.labelMedium,
-            modifier = Modifier.padding(all = 16.dp),
+            modifier = Modifier.padding(all = 16.dp)
         )
         val colors: List<Color> =
             listOf(
@@ -207,10 +207,10 @@ fun BottomSheetColorPicker(
                 LightOrange,
                 BlueGrey,
                 Green,
-                Amber,
+                Amber
             )
         LazyRow(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(16.dp)
         ) {
             itemsIndexed(colors) { selected: Int, color: Color ->
                 val value = if (notesAddOrEditViewModel.colorState.value > 0) {
@@ -224,7 +224,7 @@ fun BottomSheetColorPicker(
                     onClickColor = {
                         notesAddOrEditViewModel.notesChanged = true
                         notesAddOrEditViewModel.colorState.value = selected
-                    },
+                    }
                 )
             }
         }
@@ -235,7 +235,7 @@ fun BottomSheetColorPicker(
 fun ColorPickerItem(
     color: Color,
     selectedValue: Color,
-    onClickColor: (Color) -> Unit,
+    onClickColor: (Color) -> Unit
 ) {
     if (color != selectedValue) {
         Box(
@@ -245,13 +245,13 @@ fun ColorPickerItem(
                     selected = (color == selectedValue),
                     onClick = {
                         onClickColor(color)
-                    },
+                    }
                 )
                 .size(64.dp)
                 .clip(RoundedCornerShape(24.dp))
                 .background(
-                    color = color,
-                ),
+                    color = color
+                )
         )
     }
     if (color == selectedValue) {
@@ -263,9 +263,9 @@ fun ColorPickerItem(
                 .border(
                     border = BorderStroke(
                         width = 2.dp,
-                        brush = SolidColor(MaterialTheme.colorScheme.primary),
+                        brush = SolidColor(MaterialTheme.colorScheme.primary)
                     ),
-                    shape = RoundedCornerShape(24.dp),
+                    shape = RoundedCornerShape(24.dp)
                 ),
         ) {
             Icon(
@@ -274,7 +274,7 @@ fun ColorPickerItem(
                 modifier = Modifier
                     .size(42.dp)
                     .align(Alignment.Center),
-                tint = MaterialTheme.colorScheme.primary.copy(alpha = .8F),
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = .8F)
             )
         }
     }
