@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NotesListViewModel @Inject constructor(
     private val getAllNotesUseCase: GetAllNotesUseCase,
-    private val saveNotesUseCase: SaveNotesUseCase,
+    private val saveNotesUseCase: SaveNotesUseCase
 ) : ViewModel() {
 
     private val _notes = MutableStateFlow<Result<List<NotesEntity>>>(Result.Loading)

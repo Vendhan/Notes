@@ -8,9 +8,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GetAllNotesUseCase @Inject constructor(
-    private val notesRepository: NotesRepository,
-) {
+class GetAllNotesUseCase @Inject constructor(private val notesRepository: NotesRepository) {
     suspend fun getAllNotes(): Flow<Result<List<NotesEntity>>> {
         return flow {
             emit(Result.Loading)

@@ -22,7 +22,7 @@ fun AppBar(
     onBackPressed: () -> Unit,
     onClickPin: () -> Unit,
     onClickDeleteNotes: () -> Unit,
-    onClickColorPicker: () -> Unit
+    onClickColorPicker: () -> Unit,
 ) {
     BackHandler {
         onBackPressed()
@@ -35,7 +35,7 @@ fun AppBar(
             IconButton(
                 onClick = {
                     onBackPressed()
-                }
+                },
             ) {
                 Icon(
                     imageVector = Icons.Rounded.ArrowBack,
@@ -48,39 +48,39 @@ fun AppBar(
             IconButton(
                 onClick = {
                     onClickPin()
-                }
+                },
             ) {
                 Icon(
                     imageVector = if (isPinned) Icons.Filled.PushPin else Icons.Outlined.PushPin,
                     contentDescription = "pin",
                     modifier = Modifier.size(24.dp),
-                    tint = MaterialTheme.colorScheme.onBackground
+                    tint = MaterialTheme.colorScheme.onBackground,
                 )
             }
             IconButton(
                 onClick = {
                     onClickColorPicker()
-                }
+                },
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Palette,
                     contentDescription = "color",
-                    tint = MaterialTheme.colorScheme.onBackground
+                    tint = MaterialTheme.colorScheme.onBackground,
                 )
             }
             IconButton(
                 onClick = {
                     onClickDeleteNotes()
-                }
+                },
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Delete,
                     contentDescription = "delete",
                     modifier = Modifier.size(24.dp),
-                    tint = MaterialTheme.colorScheme.onBackground
+                    tint = MaterialTheme.colorScheme.onBackground,
                 )
             }
         },
-        title = {}
+        title = {},
     )
 }

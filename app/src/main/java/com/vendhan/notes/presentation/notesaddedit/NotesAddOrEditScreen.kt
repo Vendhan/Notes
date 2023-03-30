@@ -62,7 +62,7 @@ import com.vendhan.notes.ui.theme.Teal
 fun NotesAddOrEditScreen(
     notesListViewModel: NotesListViewModel,
     notesAddOrEditViewModel: NotesAddOrEditViewModel = hiltViewModel(),
-    popBackStack: () -> Unit,
+    popBackStack: () -> Unit
 ) {
     Scaffold(
         modifier = Modifier,

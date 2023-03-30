@@ -30,7 +30,7 @@ class NotesAddOrEditViewModel @Inject constructor(
     private val unPinNotesUseCase: UnPinNotesUseCase,
     private val deleteNotesUseCase: DeleteNotesUseCase,
     private val updateNotesUseCase: UpdateNotesUseCase,
-    savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val notesID = mutableStateOf(-1)

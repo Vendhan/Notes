@@ -25,7 +25,7 @@ fun HintTextField(
     onChange: (String) -> Unit,
     hint: String,
     textStyle: TextStyle = TextStyle(),
-    bringIntoViewRequester: BringIntoViewRequester,
+    bringIntoViewRequester: BringIntoViewRequester
 ) {
     Box(modifier = modifier) {
         if (value.isEmpty()) {
