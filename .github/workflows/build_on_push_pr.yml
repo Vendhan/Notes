@@ -34,7 +34,7 @@ jobs:
         if: ${{ always() }}
         with:
           name: ktlint-reports
-          path: build/lint/ktlint-report
+          path: app/build/lint/ktlint-report
           retention-days: 1
 
   build_job:
@@ -90,6 +90,14 @@ jobs:
           name: build-reports
           path: app/build/outputs/logs
           retention-days: 1
+
+      - name: Upload Build to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          file: app/build/outputs/apk/release/app-release-unsigned.apk
 
   test_job:
     name: Unit Tests
